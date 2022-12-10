@@ -21,7 +21,7 @@ public class Main {
         frame.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         frame.setBounds(((int) screenSize.getWidth() - WINDOW_WIDTH) / 2, 0,
                 WINDOW_WIDTH, WINDOW_HEIGHT);
-        frame.setContentPane(menuPanel);
+        frame.setContentPane(baseMainifest.getMainifest());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
