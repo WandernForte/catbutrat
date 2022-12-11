@@ -23,7 +23,8 @@ public class SQLInterFace {
         System.out.println("连接数据库...");
         Class.forName(JDBC_DRIVER);
         Statement content = connection.createStatement();
-        String sql = "SELECT count(*) FROM users WHERE user_id="+userId+" and user_pwd="+pwd;
+        String sql = "SELECT count(*) FROM users WHERE (user_id='"+userId+"' AND user_pwd='"+pwd+"');";
+        System.out.println(sql);
         ResultSet rs = content.executeQuery(sql);
         if (rs.next()) {
             flag=(rs.getInt(1) != 0);
@@ -31,5 +32,18 @@ public class SQLInterFace {
         rs.close();
         content.close();
         return flag;
+}
+public static boolean Register(String account, String userId, String pwd) throws ClassNotFoundException, SQLException {
+
+        Class.forName(JDBC_DRIVER);
+        Statement content = connection.createStatement();
+        String sql = "INSERT INTO users (user_name,user_id,user_pwd,user_type) VALUES('"+
+                account+"','"+
+                userId+"','"+
+                pwd+"','0')";
+        int flag=content.executeUpdate(sql);
+        content.close();
+        return (flag>0);
+
 }
 }

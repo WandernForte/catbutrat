@@ -39,6 +39,7 @@ public class BasePanel extends JPanel{
         this.add(address);
         this.add(ratList);
         this.add(getAddressBtn);
+
     }
     protected void getRatList(){
         //从数据库中获取所有鼠鼠的昵称

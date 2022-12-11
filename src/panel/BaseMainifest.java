@@ -1,5 +1,6 @@
 package panel;
 
+import MyFrame.MyFrame;
 import database.SQLInterFace;
 
 import javax.swing.*;
@@ -24,6 +25,9 @@ public class BaseMainifest extends JPanel {
                 try {
                     if(SQLInterFace.logIn(idField.getText(), String.valueOf(pwdField.getPassword()))){
                         System.out.println("登录成功");
+                        MyFrame.getInstance().setContentPane(new MenuPanel());
+                        MyFrame.getInstance().pack();
+                        MyFrame.getInstance().setVisible(true);
                     }else{
                     System.out.println("登录失败, 密码为:"+String.valueOf(pwdField.getPassword()));}
                 } catch (SQLException ex) {
@@ -31,6 +35,14 @@ public class BaseMainifest extends JPanel {
                 } catch (ClassNotFoundException ex) {
                     ex.printStackTrace();
                 }
+            }
+        });
+        registerBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MyFrame.getInstance().setContentPane(new RegisterPanel());
+                MyFrame.getInstance().pack();
+                MyFrame.getInstance().setVisible(true);
             }
         });
     }
