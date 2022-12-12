@@ -26,6 +26,7 @@ public class BaseMainifest extends JPanel {
                     if(SQLInterFace.logIn(idField.getText(), String.valueOf(pwdField.getPassword()))){
                         System.out.println("登录成功");
                         MyFrame.getInstance().setContentPane(new MenuPanel());
+                        MyFrame.getInstance().setTitle("欢迎"+SQLInterFace.getUserName(idField.getText()));
                         MyFrame.getInstance().pack();
                         MyFrame.getInstance().setVisible(true);
                     }else{

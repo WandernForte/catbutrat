@@ -1,6 +1,8 @@
 package database;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class SQLInterFace {
@@ -45,5 +47,32 @@ public static boolean Register(String account, String userId, String pwd) throws
         content.close();
         return (flag>0);
 
+}
+public static String getUserName(String userId) throws ClassNotFoundException, SQLException {
+    System.out.println("连接数据库...");
+    Class.forName(JDBC_DRIVER);
+    Statement content = connection.createStatement();
+    String sql = "SELECT user_name FROM users WHERE user_id="+userId+";";
+    System.out.println(sql);
+    ResultSet rs = content.executeQuery(sql);
+    String userName = null;
+    if (rs.next()) {
+        userName=rs.getString(1);
+    }
+    rs.close();
+    content.close();
+    return userName;
+}
+public static List<String> getRatsList() throws ClassNotFoundException, SQLException {
+        Class.forName(JDBC_DRIVER);
+        Statement content = connection.createStatement();
+        String sql = "SELECT nick_name from rats;";
+        ResultSet rs = content.executeQuery(sql);
+        List<String> nickNameList = new ArrayList<>();
+        while (rs.next()){
+            nickNameList.add(rs.getString(1));
+        }
+        System.out.println(nickNameList);
+        return nickNameList;
 }
 }

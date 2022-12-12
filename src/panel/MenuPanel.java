@@ -1,7 +1,13 @@
 package panel;
 
+import MyFrame.MyFrame;
+import database.SQLInterFace;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 
 public class MenuPanel extends JPanel {
@@ -33,6 +39,7 @@ public class MenuPanel extends JPanel {
         query4ValidFood=new JButton("查询可用食物");
         contactAdmin=new JButton("联系管理员");
         add2FoodBlackList=new JButton("添加食物黑名单(管理员)");
+        // 设置位置
         int y_lmt=WINDOW_HEIGHT/5;
         int i=0;
         clockIn.setBounds(0,y_lmt*i, WINDOW_WIDTH/3, WINDOW_HEIGHT/5);
@@ -42,7 +49,22 @@ public class MenuPanel extends JPanel {
         query4ValidFood.setBounds(0,y_lmt*i, WINDOW_WIDTH/3, WINDOW_HEIGHT/5);
         contactAdmin.setBounds(2*WINDOW_WIDTH/3,y_lmt*(i++), WINDOW_WIDTH/3, WINDOW_HEIGHT/5);
         add2FoodBlackList.setBounds(WINDOW_WIDTH/3,y_lmt*i,WINDOW_WIDTH/3,WINDOW_HEIGHT/5);
-
+        //设置监听器
+        clockIn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    MyFrame.getInstance().setContentPane(new BasePanel());
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                } catch (ClassNotFoundException ex) {
+                    ex.printStackTrace();
+                }
+                MyFrame.getInstance().pack();
+                MyFrame.getInstance().setVisible(true);
+            }
+        });
+        //添加到panel中
         this.setLayout(null);
         this.add(clockIn);
         this.add(query4RatsOccur);
@@ -52,4 +74,6 @@ public class MenuPanel extends JPanel {
         this.add(contactAdmin);
         this.add(add2FoodBlackList);
     }
+
+
 }

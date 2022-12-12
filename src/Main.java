@@ -6,6 +6,7 @@ import panel.RegisterPanel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.sql.SQLException;
 
 public class Main {
     public static BaseMainifest baseMainifest;
@@ -16,8 +17,7 @@ public class Main {
     private static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     public static final int WINDOW_WIDTH = 512;
     public static final int WINDOW_HEIGHT = 768;
-    public static void main(String args[])
-    {
+    public static void main(String args[]) throws SQLException, ClassNotFoundException {
         baseMainifest = new BaseMainifest();
         basePanel=new BasePanel();
         menuPanel=new MenuPanel();

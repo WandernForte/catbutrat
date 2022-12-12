@@ -1,7 +1,10 @@
 package panel;
 
+import database.SQLInterFace;
+
 import javax.swing.*;
 import java.awt.*;
+import java.sql.SQLException;
 
 public class BasePanel extends JPanel{
 
@@ -10,6 +13,8 @@ public class BasePanel extends JPanel{
     protected JComboBox<String> ratList;
     protected JButton getAddressBtn;
     protected Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+    protected int y_lmt=WINDOW_HEIGHT/10;
+    protected int i=0;
     public static final int WINDOW_WIDTH = 512;
     public static final int WINDOW_HEIGHT = 768;
     ImageIcon icon;
@@ -20,20 +25,21 @@ public class BasePanel extends JPanel{
         //下面这行是为了背景图片可以跟随窗口自行调整大小，可以自己设置成固定大小
         g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
     }
-    public BasePanel(){
+    public BasePanel() throws SQLException, ClassNotFoundException {
         this.setPreferredSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
         icon=new ImageIcon(getClass().getResource("/img/HomeImg.jpg"));
         img=icon.getImage();
         ratNickName=new JLabel("鼠鼠昵称");
         address=new JLabel("地点");
-        ratList=new JComboBox<String>();
+        String [] ratarray = SQLInterFace.getRatsList().toArray(new String[SQLInterFace.getRatsList().size()]);
+        ratList=new JComboBox<String>(ratarray);
+
         getAddressBtn=new JButton("获取当前位置");
-        int y_lmt=50;
-        int x_lmt=50;
-        ratNickName.setBounds(0,0, 115, 50);
-        address.setBounds(0,WINDOW_HEIGHT/5, 115, 50);
-        getAddressBtn.setBounds(WINDOW_WIDTH/3, WINDOW_HEIGHT/5,115, 50);
-        ratList.setBounds(WINDOW_WIDTH/3,0,115,50);
+
+        ratNickName.setBounds(0,y_lmt*i, WINDOW_WIDTH/3, WINDOW_HEIGHT/10);
+        ratList.setBounds(2*WINDOW_WIDTH/3,y_lmt*(i++), WINDOW_WIDTH/3, WINDOW_HEIGHT/10);
+        address.setBounds(0,y_lmt*i, WINDOW_WIDTH/3, WINDOW_HEIGHT/10);
+        getAddressBtn.setBounds(2*WINDOW_WIDTH/3,y_lmt*(i++), WINDOW_WIDTH/3, WINDOW_HEIGHT/10);
         this.setLayout(null);
         this.add(ratNickName);
         this.add(address);
@@ -41,9 +47,7 @@ public class BasePanel extends JPanel{
         this.add(getAddressBtn);
 
     }
-    protected void getRatList(){
-        //从数据库中获取所有鼠鼠的昵称
-    }
+
 
 
 }
