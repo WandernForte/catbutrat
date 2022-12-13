@@ -54,7 +54,7 @@ public class RegisterPanel extends JPanel{
                         MyFrame.getInstance().pack();
                         MyFrame.getInstance().setVisible(true);
                     }else{
-                        System.out.println("注册失败, 密码为:"+String.valueOf(pwdField.getPassword()));}
+                        System.out.println("注册失败");}
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                 } catch (ClassNotFoundException ex) {

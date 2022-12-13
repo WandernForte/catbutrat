@@ -1,7 +1,6 @@
 package panel;
 
 import MyFrame.MyFrame;
-import database.SQLInterFace;
 
 import javax.swing.*;
 import java.awt.*;
@@ -50,11 +49,25 @@ public class MenuPanel extends JPanel {
         contactAdmin.setBounds(2*WINDOW_WIDTH/3,y_lmt*(i++), WINDOW_WIDTH/3, WINDOW_HEIGHT/5);
         add2FoodBlackList.setBounds(WINDOW_WIDTH/3,y_lmt*i,WINDOW_WIDTH/3,WINDOW_HEIGHT/5);
         //设置监听器
+        ratFeedSign.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    MyFrame.getInstance().setContentPane(new FeedSignPanel());
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                } catch (ClassNotFoundException ex) {
+                    ex.printStackTrace();
+                }
+                MyFrame.getInstance().pack();
+                MyFrame.getInstance().setVisible(true);
+            }
+        });
         clockIn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    MyFrame.getInstance().setContentPane(new BasePanel());
+                    MyFrame.getInstance().setContentPane(new ClockInPanel());
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                 } catch (ClassNotFoundException ex) {

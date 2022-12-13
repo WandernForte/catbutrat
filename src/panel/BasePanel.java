@@ -4,6 +4,8 @@ import database.SQLInterFace;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
 public class BasePanel extends JPanel{
@@ -11,12 +13,12 @@ public class BasePanel extends JPanel{
     protected JLabel ratNickName;
     protected JLabel address;
     protected JComboBox<String> ratList;
-    protected JButton getAddressBtn;
+    protected JComboBox<String> addressList;
     protected Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     protected int y_lmt=WINDOW_HEIGHT/10;
     protected int i=0;
     public static final int WINDOW_WIDTH = 512;
-    public static final int WINDOW_HEIGHT = 768;
+    public static final int WINDOW_HEIGHT = 384;
     ImageIcon icon;
     Image img;
     @Override
@@ -33,18 +35,17 @@ public class BasePanel extends JPanel{
         address=new JLabel("地点");
         String [] ratarray = SQLInterFace.getRatsList().toArray(new String[SQLInterFace.getRatsList().size()]);
         ratList=new JComboBox<String>(ratarray);
-
-        getAddressBtn=new JButton("获取当前位置");
-
+        String [] addressArray = SQLInterFace.getAddressList().toArray(new String[SQLInterFace.getRatsList().size()]);
+        addressList=new JComboBox<String>(addressArray);
         ratNickName.setBounds(0,y_lmt*i, WINDOW_WIDTH/3, WINDOW_HEIGHT/10);
         ratList.setBounds(2*WINDOW_WIDTH/3,y_lmt*(i++), WINDOW_WIDTH/3, WINDOW_HEIGHT/10);
         address.setBounds(0,y_lmt*i, WINDOW_WIDTH/3, WINDOW_HEIGHT/10);
-        getAddressBtn.setBounds(2*WINDOW_WIDTH/3,y_lmt*(i++), WINDOW_WIDTH/3, WINDOW_HEIGHT/10);
+        addressList.setBounds(2*WINDOW_WIDTH/3,y_lmt*(i++), WINDOW_WIDTH/3, WINDOW_HEIGHT/10);
         this.setLayout(null);
         this.add(ratNickName);
         this.add(address);
         this.add(ratList);
-        this.add(getAddressBtn);
+        this.add(addressList);
 
     }
 
